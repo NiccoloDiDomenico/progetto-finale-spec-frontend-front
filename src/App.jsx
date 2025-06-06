@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppLayouts from './layouts/AppLayouts';
+import { Routes, Route } from 'react-router-dom';
+import AppLayouts from './layout/AppLayouts';
 import HomePage from './pages/HomePage';
 import ChampionDetailPage from './pages/ChampionDetailPage';
 import ComparePage from './pages/ComparePage';
@@ -10,16 +10,14 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayouts />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/champion/:id" element={<ChampionDetailPage />} />
-            <Route path="/compare" element={<ComparePage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route element={<AppLayouts />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/champion/:id" element={<ChampionDetailPage />} />
+          <Route path="/compare" element={<ComparePage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }
