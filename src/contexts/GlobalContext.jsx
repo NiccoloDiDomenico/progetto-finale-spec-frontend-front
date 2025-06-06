@@ -6,9 +6,10 @@ export const GlobalContext = createContext();
 
 // Create provider
 export const GlobalProvider = ({ children }) => {
+    const data = useChampions();
 
     return (
-        <GlobalContext.Provider value={{}}>
+        <GlobalContext.Provider value={{ ...data }}>
             {children}
         </GlobalContext.Provider>
     );
