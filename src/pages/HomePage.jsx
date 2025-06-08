@@ -24,7 +24,7 @@ export default function HomePage() {
                                 id="champion-search"
                                 type="text"
                                 placeholder="Search champions..."
-                                className="px-4 py-2 rounded bg-gray-800 text-white w-full md:w-84"
+                                className="px-4 py-2 rounded bg-gray-800 text-white w-full md:w-md"
                                 value={inputValue}
                                 onChange={(e) => {
                                     setInputValue(e.target.value);
