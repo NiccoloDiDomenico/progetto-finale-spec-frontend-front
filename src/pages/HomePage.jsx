@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 import { Link } from "react-router-dom";
+import ChampionCard from "../components/ChampionCard";
 
 export default function HomePage() {
     const { champions, loading, error } = useContext(GlobalContext);
@@ -26,19 +27,10 @@ export default function HomePage() {
                 {/* Champions Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {champions.map((champion) => (
-                        <Link
-                            to={`/champion/${champion.id}`}
+                        <ChampionCard
                             key={champion.id}
-                            className="bg-gray-800 rounded-lg p-4 flex flex-col items-center hover:bg-gray-700 transition-colors cursor-pointer"
-                        >
-                            <img
-                                src={champion.image.square}
-                                alt={champion.name}
-                                className="w-32 h-32 rounded-lg mb-4 object-cover"
-                            />
-                            <h2 className="text-2xl font-bold mb-2 hover:text-yellow-300 transition-colors">{champion.title}</h2>
-                            <p className="text-gray-400">{champion.category.toUpperCase()}</p>
-                        </Link>
+                            champion={champion}
+                        />
                     ))}
                 </div>
 
