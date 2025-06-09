@@ -5,7 +5,16 @@ import ChampionCard from "../components/ChampionCard";
 export default function HomePage() {
     const { champions, loading, error, categories, setSearchQuery, setCategoryFilter } = useContext(GlobalContext);
 
-    const [inputValue, setInputValue] = useState(""); // Add this state
+    const [inputValue, setInputValue] = useState("");
+    const [sortBy, setSortBy] = useState("default");
+
+    const sortedChampions = [...champions].sort((a, b) => {
+        if (sortBy === "default") return 0;
+
+        const [field, direction] = sortBy.split("-");
+
+        return a[field].localeCompare(b[field]) * (direction === "asc" ? 1 : -1);
+    });
 
     return (
         <div className="min-h-screen w-full bg-gray-900">
@@ -18,13 +27,13 @@ export default function HomePage() {
                     </p>
 
                     {/* Search Bar */}
-                    <div className="flex flex-col items-stretch md:flex-row md:justify-center gap-4 my-12">
-                        <div className="relative">
+                    <div className="flex flex-col items-stretch md:flex-row md:justify-center lg:flex-wrap gap-4 my-12">
+                        <div className="relative basis-80">
                             <input
                                 id="champion-search"
                                 type="text"
                                 placeholder="Search champions..."
-                                className="px-4 py-2 rounded bg-gray-800 text-white w-full md:w-md"
+                                className="px-4 py-2 rounded bg-gray-800 text-white w-full"
                                 value={inputValue}
                                 onChange={(e) => {
                                     setInputValue(e.target.value);
@@ -48,6 +57,16 @@ export default function HomePage() {
                                 )
                             }
                         </div>
+
+                        {/* {Filter SVG} */}
+                        <div className="px-4 py-2 rounded text-white flex items-center">
+                            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6">
+                                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" fill="#3273FA"></path>
+                            </svg>
+                            <span className="ms-2 font-bold">Filters</span>
+                        </div>
+
+                        {/* {Filter Category} */}
                         <select
                             className="px-4 py-2 rounded bg-gray-800 text-white"
                             onChange={(e) => setCategoryFilter(e.target.value)}
@@ -56,6 +75,19 @@ export default function HomePage() {
                             {categories.map((category, index) => (
                                 <option key={index} value={category.toLowerCase()}>{category}</option>
                             ))}
+                        </select>
+
+                        {/* Filter Sort */}
+                        <select
+                            className="px-4 py-2 rounded bg-gray-800 text-white"
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                        >
+                            <option value="default">Sort by...</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                            <option value="category-asc">Roles A-Z</option>
+                            <option value="category-desc">Roles Z-A</option>
                         </select>
                     </div>
                 </section>
@@ -69,8 +101,8 @@ export default function HomePage() {
                     )}
 
                     {/* Champions Grid */}
-                    <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                        {champions.map((champion) => (
+                    <div className="grid md:grid-cols-3 xl:grid-cols-5 gap-6">
+                        {sortedChampions.map((champion) => (
                             <ChampionCard
                                 key={champion.id}
                                 champion={champion}
