@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 import ChampionCard from "../components/ChampionCard";
 
@@ -8,13 +8,17 @@ export default function HomePage() {
     const [inputValue, setInputValue] = useState("");
     const [sortBy, setSortBy] = useState("default");
 
-    const sortedChampions = [...champions].sort((a, b) => {
-        if (sortBy === "default") return 0;
+    const sortedChampions = useMemo(() => {
+        return [...champions].sort((a, b) => {
+            console.log("Resorting...");
 
-        const [field, direction] = sortBy.split("-");
+            if (sortBy === "default") return 0;
 
-        return a[field].localeCompare(b[field]) * (direction === "asc" ? 1 : -1);
-    });
+            const [field, direction] = sortBy.split("-");
+
+            return a[field].localeCompare(b[field]) * (direction === "asc" ? 1 : -1);
+        })
+    }, [champions, sortBy]);
 
     return (
         <div className="min-h-screen w-full bg-gray-900">
