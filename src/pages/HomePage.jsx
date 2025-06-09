@@ -1,21 +1,18 @@
 import { useContext, useMemo, useState } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 import ChampionCard from "../components/ChampionCard";
+import SearchBar from "../components/SearchBar";
+import CategoryFilter from "../components/CategoryFilters";
+import SortFilter from "../components/SortFilter";
 
 export default function HomePage() {
     const { champions, loading, error, categories, setSearchQuery, setCategoryFilter } = useContext(GlobalContext);
-
-    const [inputValue, setInputValue] = useState("");
     const [sortBy, setSortBy] = useState("default");
 
     const sortedChampions = useMemo(() => {
         return [...champions].sort((a, b) => {
-            console.log("Resorting...");
-
             if (sortBy === "default") return 0;
-
             const [field, direction] = sortBy.split("-");
-
             return a[field].localeCompare(b[field]) * (direction === "asc" ? 1 : -1);
         })
     }, [champions, sortBy]);
@@ -30,37 +27,11 @@ export default function HomePage() {
                         Explore detailed statistics and information about your favorite League of Legends champions.
                     </p>
 
-                    {/* Search Bar */}
                     <div className="flex flex-col items-stretch md:flex-row md:justify-center lg:flex-wrap gap-4 my-12">
-                        <div className="relative basis-80">
-                            <input
-                                id="champion-search"
-                                type="text"
-                                placeholder="Search champions..."
-                                className="px-4 py-2 rounded bg-gray-800 text-white w-full"
-                                value={inputValue}
-                                onChange={(e) => {
-                                    setInputValue(e.target.value);
-                                    setSearchQuery(e.target.value);
-                                }}
-                            />
-                            {
-                                inputValue && (
-                                    <button
-                                        type="button"
-                                        className="absolute right-2 top-2 text-gray-400 hover:text-white"
-                                        aria-label="Clear search"
-                                        aria-controls="champion-search"
-                                        onClick={() => {
-                                            setSearchQuery("");
-                                            setInputValue("");
-                                        }}
-                                    >
-                                        ✕
-                                    </button>
-                                )
-                            }
-                        </div>
+                        {/* Search Bar */}
+                        <SearchBar
+                            setSearchQuery={setSearchQuery}
+                        />
 
                         {/* {Filter SVG} */}
                         <div className="px-4 py-2 rounded text-white flex items-center">
@@ -71,28 +42,16 @@ export default function HomePage() {
                         </div>
 
                         {/* {Filter Category} */}
-                        <select
-                            className="px-4 py-2 rounded bg-gray-800 text-white"
-                            onChange={(e) => setCategoryFilter(e.target.value)}
-                        >
-                            <option value="">All Roles</option>
-                            {categories.map((category, index) => (
-                                <option key={index} value={category.toLowerCase()}>{category}</option>
-                            ))}
-                        </select>
+                        <CategoryFilter
+                            categories={categories}
+                            setCategoryFilter={setCategoryFilter}
+                        />
 
                         {/* Filter Sort */}
-                        <select
-                            className="px-4 py-2 rounded bg-gray-800 text-white"
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                        >
-                            <option value="default">Sort by...</option>
-                            <option value="title-asc">Title A-Z</option>
-                            <option value="title-desc">Title Z-A</option>
-                            <option value="category-asc">Roles A-Z</option>
-                            <option value="category-desc">Roles Z-A</option>
-                        </select>
+                        <SortFilter
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                        />
                     </div>
                 </section>
 
@@ -105,7 +64,7 @@ export default function HomePage() {
                     )}
 
                     {/* Champions Grid */}
-                    <div className="grid md:grid-cols-3 xl:grid-cols-5 gap-6">
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                         {sortedChampions.map((champion) => (
                             <ChampionCard
                                 key={champion.id}
