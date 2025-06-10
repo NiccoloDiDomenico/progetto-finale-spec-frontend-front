@@ -42,6 +42,7 @@ export default function useChampions() {
         champions,
         loading,
         error,
+        searchQuery,
         setSearchQuery,
         setCategoryFilter,
         categories,

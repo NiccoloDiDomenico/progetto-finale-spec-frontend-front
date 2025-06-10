@@ -1,23 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { GlobalContext } from "../contexts/GlobalContext";
 
-export default function SearchBar({ setSearchQuery }) {
-    const [inputValue, setInputValue] = useState("");
+export default function SearchBar() {
+    const { searchQuery, setSearchQuery } = useContext(GlobalContext);
 
     return (
-        <div className="relative">
+        <div className="relative flex-1 max-w-md">
             <input
-                id="champion-search"
                 type="text"
                 placeholder="Search champions..."
-                className="px-4 py-2 rounded bg-gray-800 text-white w-full"
-                value={inputValue}
-                onChange={(e) => {
-                    setInputValue(e.target.value);
-                    setSearchQuery(e.target.value);
-                }}
+                className="w-full bg-gray-800 p-2 rounded-lg text-white"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
             />
             {
-                inputValue && (
+                searchQuery && (
                     <button
                         type="button"
                         className="absolute right-2 top-2 text-gray-400 hover:text-white"
@@ -32,6 +29,6 @@ export default function SearchBar({ setSearchQuery }) {
                     </button>
                 )
             }
-        </div>
+        </div >
     );
 };

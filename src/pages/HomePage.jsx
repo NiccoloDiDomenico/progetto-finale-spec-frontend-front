@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 import ChampionCard from "../components/ChampionCard";
 import SearchBar from "../components/SearchBar";
@@ -8,6 +8,11 @@ import SortFilter from "../components/SortFilter";
 export default function HomePage() {
     const { champions, loading, error, categories, setSearchQuery, setCategoryFilter } = useContext(GlobalContext);
     const [sortBy, setSortBy] = useState("default");
+
+    useEffect(() => {
+        setSearchQuery("");
+        setCategoryFilter("");
+    }, []);
 
     const sortedChampions = useMemo(() => {
         return [...champions].sort((a, b) => {
@@ -29,9 +34,7 @@ export default function HomePage() {
 
                     <div className="flex flex-col items-stretch md:flex-row md:justify-center lg:flex-wrap gap-4 my-12">
                         {/* Search Bar */}
-                        <SearchBar
-                            setSearchQuery={setSearchQuery}
-                        />
+                        <SearchBar />
 
                         {/* {Filter SVG} */}
                         <div className="px-4 py-2 rounded text-white flex items-center">
