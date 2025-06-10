@@ -11,6 +11,7 @@ export default function useChampionDetail(id) {
         const fetchChampion = async () => {
             try {
                 const res = await fetch(`${API_URL}/champions/${id}`);
+                if (!res.ok) throw new Error("Failed to fetch");
                 const data = await res.json();
                 setChampion(data.champion);
             } catch (error) {
