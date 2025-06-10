@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import useChampionDetail from "../hooks/useChampionDetail";
+import { getDifficultyRating } from "../utility/customFunctions";
 
 export default function ChampionsDetailPage() {
     const { id } = useParams();
@@ -82,8 +83,8 @@ export default function ChampionsDetailPage() {
                     ref={detailsRef}
                     className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12"
                 >
-                    {/* Quick Info */}
-                    <h2 className="text-3xl font-bold text-yellow-300 mb-4">Info</h2>
+                    {/* Details */}
+                    <h2 className="text-3xl font-bold text-yellow-300 mb-4">Details</h2>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                         <div className="bg-gray-800 p-4 rounded-lg">
                             <p className="text-gray-400">Position</p>
@@ -99,7 +100,7 @@ export default function ChampionsDetailPage() {
                         </div>
                         <div className="bg-gray-800 p-4 rounded-lg">
                             <p className="text-gray-400">Difficulty</p>
-                            <p className="font-bold text-xl">{champion.info.difficulty}/10</p>
+                            <p className="font-bold text-xl">{getDifficultyRating(champion.info.difficulty)}</p>
                         </div>
                     </div>
 
