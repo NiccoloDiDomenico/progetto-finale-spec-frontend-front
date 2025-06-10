@@ -41,34 +41,37 @@ export default function ChampionsDetailPage() {
         <>
             <div className="bg-gray-900 text-white">
                 {/* Hero full screen */}
-                <div className="relative min-h-[60vh] lg:h-[calc(100vh-4rem)] w-full overflow-hidden">
+                <div className="relative lg:h-[calc(100vh-4rem)] w-full overflow-hidden">
                     <img
                         src={champion.image.splash}
                         alt={champion.title}
                         className="absolute w-full h-full object-cover"
                     />
+
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 via-gray-900/60 to-gray-900/80" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-gray-900/20 via-gray-900/40 to-gray-900/20" />
 
                     {/* Content */}
-                    <div className="relative z-20 h-full flex items-center px-4 sm:px-6 lg:px-10">
-                        <div className="max-w-4xl space-y-3 sm:space-y-4 py-10 sm:py-16">
-                            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-yellow-300">
-                                {champion.title.toUpperCase()}
-                            </h1>
-                            <p className="text-base sm:text-lg lg:text-xl italic text-gray-300">
-                                {champion.description.toUpperCase()}
-                            </p>
-                            <p className="max:md:hidden text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed max-w-2xl">
-                                {champion.lore}
-                            </p>
+                    <div className="relative z-20 h-full container mx-auto">
+                        <div className="h-full flex items-center px-4 sm:px-6 lg:px-8">
+                            <div className="max-w-4xl space-y-3 sm:space-y-4 py-10 sm:py-16">
+                                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-yellow-300">
+                                    {champion.title.toUpperCase()}
+                                </h1>
+                                <p className="text-base sm:text-lg lg:text-xl italic text-gray-300">
+                                    {champion.description.toUpperCase()}
+                                </p>
+                                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed max-w-2xl">
+                                    {champion.lore}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     {/* Scroll indicator */}
                     <div
                         onClick={handleScroll}
-                        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 lg:px-8 py-2 lg:py-4 rounded-4xl text-yellow-300 text-sm sm:text-lg lg:text-xl cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
+                        className="max-lg:hidden absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 lg:px-8 py-2 lg:py-4 rounded-4xl text-yellow-300 text-sm sm:text-lg lg:text-xl cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
                     >
                         ↓
                     </div>
@@ -79,8 +82,8 @@ export default function ChampionsDetailPage() {
                     ref={detailsRef}
                     className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12"
                 >
-                    <h2 className="text-3xl font-bold text-yellow-300 mb-4">Info</h2>
                     {/* Quick Info */}
+                    <h2 className="text-3xl font-bold text-yellow-300 mb-4">Info</h2>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                         <div className="bg-gray-800 p-4 rounded-lg">
                             <p className="text-gray-400">Position</p>
@@ -104,7 +107,7 @@ export default function ChampionsDetailPage() {
                     <div>
                         <h2 className="text-3xl font-bold text-yellow-300 mb-4">Abilities</h2>
                         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                            {/* Passive first */}
+                            {/* Passive */}
                             <div
                                 className="bg-gray-800 p-4 rounded-lg cursor-pointer hover:scale-105 transition"
                                 onClick={() => setSelectedAbility({ ...champion.passive, key: "P" })}
