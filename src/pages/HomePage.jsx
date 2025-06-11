@@ -72,6 +72,7 @@ export default function HomePage() {
                             <ChampionCard
                                 key={champion.id}
                                 champion={champion}
+                                category={true}
                             />
                         ))}
                     </div>

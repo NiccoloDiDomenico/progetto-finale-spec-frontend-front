@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function ChampionCard({ champion }) {
+export default function ChampionCard({ champion, category }) {
+
     return (
         <Link
             to={`/champion/${champion.id}`}
@@ -13,8 +14,10 @@ export default function ChampionCard({ champion }) {
                 className="w-18 sm:w-24 rounded-lg sm:mb-4 object-cover"
             />
             <div className="text-center">
-                <h2 className="text-lg md:text-2xl font-bold mb-2 hover:text-yellow-300 transition-colors">{champion.title.toUpperCase()}</h2>
-                <p className="text-gray-400">{champion.category.toUpperCase()}</p>
+                <h2 className="text-lg md:text-xl font-bold hover:text-yellow-300 transition-colors">{champion.title.toUpperCase()}</h2>
+                {category && (
+                    <p className="text-gray-400">{champion.category.toUpperCase()}</p>
+                )}
             </div>
         </Link>
     )

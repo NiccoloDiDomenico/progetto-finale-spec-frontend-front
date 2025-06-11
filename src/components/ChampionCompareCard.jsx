@@ -1,21 +1,12 @@
 import { getDifficultyRating, getColorClass } from "../utility/customFunctions";
+import ChampionCard from "./ChampionCard";
 
 export default function ChampionCompareCard({ champion, rival }) {
 
     return (
         <div className="bg-gray-800 rounded-xl p-6 space-y-6 shadow-md relative">
             {/* Header with image and title */}
-            <div className="flex gap-4 items-center">
-                <img
-                    src={champion.image.square}
-                    alt={champion.title}
-                    className="w-24 h-24 rounded-lg"
-                />
-                <div>
-                    <h2 className="text-xl font-bold text-yellow-300">{champion.title.toUpperCase()}</h2>
-                    <p className="text-gray-400">{champion.description.toUpperCase()}</p>
-                </div>
-            </div>
+            <ChampionCard champion={champion} />
 
             {/* Detail Section */}
             <div className="space-y-4">
