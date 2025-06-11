@@ -28,7 +28,11 @@ export default function ComparatorPage() {
                         >
                             <option value="">Select Champion</option>
                             {champions.map((champ) => (
-                                <option key={champ.id} value={champ.id}>
+                                <option
+                                    key={champ.id}
+                                    value={champ.id}
+                                    disabled={champ.id === parseInt(secondChampionId)}
+                                >
                                     {champ.title}
                                 </option>
                             ))}
@@ -41,7 +45,11 @@ export default function ComparatorPage() {
                         >
                             <option value="">Select Champion</option>
                             {champions.map((champ) => (
-                                <option key={champ.id} value={champ.id}>
+                                <option
+                                    key={champ.id}
+                                    value={champ.id}
+                                    disabled={champ.id === parseInt(firstChampionId)}
+                                >
                                     {champ.title}
                                 </option>
                             ))}
@@ -53,6 +61,7 @@ export default function ComparatorPage() {
                         <p className="text-xl text-gray-300 text-center"> Select champions to compare</p>
                     )}
 
+                    {/* Champion Compare Card */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {firstChampionId && champOne && (
                             <ChampionCompareCard
@@ -60,7 +69,7 @@ export default function ComparatorPage() {
                                 rival={champTwo}
                             />
                         )}
-                        {setSecondChampionId && champTwo && (
+                        {secondChampionId && champTwo && (
                             <ChampionCompareCard
                                 champion={champTwo}
                                 rival={champOne}
@@ -68,7 +77,7 @@ export default function ComparatorPage() {
                         )}
                     </div>
                 </section>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
