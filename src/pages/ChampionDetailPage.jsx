@@ -72,9 +72,9 @@ export default function ChampionsDetailPage() {
                 {/* Scroll indicator */}
                 <div
                     onClick={handleScroll}
-                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 md:px-6 py-2 md:py-3 rounded-4xl text-yellow-300 text-sm md:text-base cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 md:px-6 py-2 md:py-3 rounded-4xl cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
                 >
-                    Exlore {champion.title}
+                    <span className="text-yellow-300 text-sm md:text-base lg:text-lg">Explore {champion.title}</span>
                 </div>
             </section>
 

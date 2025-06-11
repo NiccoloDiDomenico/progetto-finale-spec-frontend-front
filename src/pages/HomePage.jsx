@@ -24,11 +24,11 @@ export default function HomePage() {
 
     return (
         <div className="min-h-screen w-full bg-gray-900">
-            <div className="container mx-auto py-5 px-20 text-white">
+            <div className="container mx-auto py-10 px-20 text-white">
                 {/* Hero Section */}
                 <section className="text-center">
-                    <h1 className="text-6xl font-bold mb-4">Welcome to <span className="text-yellow-300">LoL Stats</span></h1>
-                    <p className="text-xl text-gray-300">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-4"><span className="text-yellow-300">LoL Stats</span></h1>
+                    <p className="text-lg md:text-xl text-gray-300">
                         Explore detailed statistics and information about your favorite League of Legends champions.
                     </p>
 
