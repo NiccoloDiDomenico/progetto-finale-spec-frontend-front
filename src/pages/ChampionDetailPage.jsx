@@ -6,7 +6,9 @@ import { getDifficultyRating } from "../utility/customFunctions";
 export default function ChampionsDetailPage() {
     const { id } = useParams();
     const { champion, loading, error } = useChampionDetail(id);
+
     const detailsRef = useRef(null);
+
     const [selectedAbility, setSelectedAbility] = useState(null);
     const abilityKeys = ["P", "Q", "W", "E", "R"];
 
@@ -39,68 +41,69 @@ export default function ChampionsDetailPage() {
     }
 
     return (
-        <>
-            <div className="bg-gray-900 text-white">
-                {/* Hero full screen */}
-                <div className="relative lg:h-[calc(100vh-4rem)] w-full overflow-hidden">
-                    <img
-                        src={champion.image.splash}
-                        alt={champion.title}
-                        className="absolute w-full h-full object-cover"
-                    />
+        <div className="bg-gray-900 text-white">
 
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-900/20 via-gray-900/40 to-gray-900/20" />
+            {/* Hero section */}
+            <section className="relative h-[calc(100vh-3rem)] w-full overflow-hidden">
 
-                    {/* Content */}
-                    <div className="relative z-20 h-full container mx-auto">
-                        <div className="h-full flex items-center px-4 sm:px-6 lg:px-8">
-                            <div className="max-w-4xl space-y-3 sm:space-y-4 py-10 sm:py-16">
-                                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-yellow-300">
-                                    {champion.title.toUpperCase()}
-                                </h1>
-                                <p className="text-base sm:text-lg lg:text-xl italic text-gray-300">
-                                    {champion.description.toUpperCase()}
-                                </p>
-                                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed max-w-2xl">
-                                    {champion.lore}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                {/* {Splash art} */}
+                <img
+                    src={champion.image.splash}
+                    alt={champion.title}
+                    className="absolute w-full h-full object-cover"
+                />
 
-                    {/* Scroll indicator */}
-                    <div
-                        onClick={handleScroll}
-                        className="max-lg:hidden absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 lg:px-8 py-2 lg:py-4 rounded-4xl text-yellow-300 text-sm sm:text-lg lg:text-xl cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
-                    >
-                        ↓
-                    </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/20 via-gray-900/40 to-gray-900/20" />
+
+                {/* Content */}
+                <div className="relative h-full z-20 container mx-auto px-10 flex flex-col justify-center">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-300">
+                        {champion.title.toUpperCase()}
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl italic text-gray-300">
+                        {champion.description.toUpperCase()}
+                    </p>
+                    <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl">
+                        {champion.lore}
+                    </p>
                 </div>
 
-                {/* Details section */}
+                {/* Scroll indicator */}
                 <div
-                    ref={detailsRef}
-                    className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12"
+                    onClick={handleScroll}
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 px-4 md:px-6 py-2 md:py-3 rounded-4xl text-yellow-300 text-sm md:text-base cursor-pointer animate-pulse bg-gray-900/30  hover:bg-gray-900/40 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40"
                 >
+                    Exlore {champion.title}
+                </div>
+            </section>
+
+            {/* Details section */}
+            <section
+                ref={detailsRef}
+                className="min-h-screen container mx-auto px-10 py-10"
+            >
+                <div className="space-y-8">
                     {/* Details */}
-                    <h2 className="text-3xl font-bold text-yellow-300 mb-4">Details</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                        <div className="bg-gray-800 p-4 rounded-lg">
-                            <p className="text-gray-400">Position</p>
-                            <p className="font-bold text-xl">{champion.role.charAt(0).toUpperCase() + champion.role.slice(1)}</p>
-                        </div>
-                        <div className="bg-gray-800 p-4 rounded-lg">
-                            <p className="text-gray-400">Role</p>
-                            <p className="font-bold text-xl">{champion.category}</p>
-                        </div>
-                        <div className="bg-gray-800 p-4 rounded-lg">
-                            <p className="text-gray-400">Resource</p>
-                            <p className="font-bold text-xl">{champion.partype}</p>
-                        </div>
-                        <div className="bg-gray-800 p-4 rounded-lg">
-                            <p className="text-gray-400">Difficulty</p>
-                            <p className="font-bold text-xl">{getDifficultyRating(champion.info.difficulty)}</p>
+                    <div>
+                        <h2 className="text-3xl font-bold text-yellow-300 mb-4">Details</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                            <div className="bg-gray-800 p-4 rounded-lg">
+                                <p className="text-gray-400">Position</p>
+                                <p className="font-bold text-xl">{champion.role.charAt(0).toUpperCase() + champion.role.slice(1)}</p>
+                            </div>
+                            <div className="bg-gray-800 p-4 rounded-lg">
+                                <p className="text-gray-400">Role</p>
+                                <p className="font-bold text-xl">{champion.category}</p>
+                            </div>
+                            <div className="bg-gray-800 p-4 rounded-lg">
+                                <p className="text-gray-400">Resource</p>
+                                <p className="font-bold text-xl">{champion.partype}</p>
+                            </div>
+                            <div className="bg-gray-800 p-4 rounded-lg">
+                                <p className="text-gray-400">Difficulty</p>
+                                <p className="font-bold text-xl">{getDifficultyRating(champion.info.difficulty)}</p>
+                            </div>
                         </div>
                     </div>
 
@@ -218,28 +221,32 @@ export default function ChampionsDetailPage() {
                     </div>
 
                     {/* Tips */}
-                    {champion.allytips.length > 0 && champion.enemytips && (
+                    <div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <h2 className="text-2xl font-bold text-green-400 mb-2">Ally Tips</h2>
-                                <ul className="list-disc pl-5 space-y-1 text-gray-300">
-                                    {champion.allytips.map((tip, i) => (
-                                        <li key={i}>{tip}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div>
-                                <h2 className="text-2xl font-bold text-red-400 mb-2">Enemy Tips</h2>
-                                <ul className="list-disc pl-5 space-y-1 text-gray-300">
-                                    {champion.enemytips.map((tip, i) => (
-                                        <li key={i}>{tip}</li>
-                                    ))}
-                                </ul>
-                            </div>
+                            {champion.allytips.length > 0 && (
+                                <div>
+                                    <h2 className="text-2xl font-bold text-green-400 mb-2">Ally Tips</h2>
+                                    <ul className="list-disc pl-5 space-y-1 text-gray-300">
+                                        {champion.allytips.map((tip, i) => (
+                                            <li key={i}>{tip}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            {champion.enemytips.length > 0 && (
+                                <div>
+                                    <h2 className="text-2xl font-bold text-red-400 mb-2">Enemy Tips</h2>
+                                    <ul className="list-disc pl-5 space-y-1 text-gray-300">
+                                        {champion.enemytips.map((tip, i) => (
+                                            <li key={i}>{tip}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
-            </div>
-        </>
+            </section>
+        </div>
     );
 }
