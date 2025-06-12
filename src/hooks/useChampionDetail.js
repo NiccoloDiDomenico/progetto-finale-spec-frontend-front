@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const API_URL = import.meta.env.VITE_API_URL;
+import { fetchChampionById } from "../api/champions";
 
 export default function useChampionDetail(id) {
     const [champion, setChampion] = useState(null);
@@ -8,20 +8,19 @@ export default function useChampionDetail(id) {
 
     useEffect(() => {
         if (!id) return;
-        const fetchChampion = async () => {
+
+        const getChampion = async () => {
             try {
-                const res = await fetch(`${API_URL}/champions/${id}`);
-                if (!res.ok) throw new Error("Failed to fetch");
-                const data = await res.json();
+                const data = await fetchChampionById(id);
                 setChampion(data.champion);
             } catch (error) {
-                setError(true)
+                setError(true);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
-        }
+        };
 
-        fetchChampion();
+        getChampion();
     }, [id]);
 
     return { champion, loading, error };

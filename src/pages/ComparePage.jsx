@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../contexts/GlobalContext";
+import { useEffect, useState } from "react";
+import { useChampions } from "../hooks/useChampions";
 import useChampionDetail from "../hooks/useChampionDetail";
 import ChampionCompareCard from "../components/ChampionCompareCard";
 
 export default function ComparatorPage() {
-    const { champions } = useContext(GlobalContext);
+    const { champions } = useChampions();
     const [firstChampionId, setFirstChampionId] = useState("");
     const [secondChampionId, setSecondChampionId] = useState("");
 

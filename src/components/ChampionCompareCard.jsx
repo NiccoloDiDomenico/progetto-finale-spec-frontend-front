@@ -1,4 +1,4 @@
-import { getDifficultyRating, getColorClass } from "../utility/customFunctions";
+import { getDifficultyRating, getColorClass } from "../utils/customFunctions";
 import ChampionCard from "./ChampionCard";
 
 export default function ChampionCompareCard({ champion, rival }) {

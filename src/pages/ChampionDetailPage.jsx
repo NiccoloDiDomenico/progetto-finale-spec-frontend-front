@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import useChampionDetail from "../hooks/useChampionDetail";
-import { getDifficultyRating } from "../utility/customFunctions";
+import { getDifficultyRating } from "../utils/customFunctions";
 
 export default function ChampionsDetailPage() {
     const { id } = useParams();

@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import ChampionDetailPage from './pages/ChampionDetailPage';
 import ComparePage from './pages/ComparePage';
 import FavoritesPage from './pages/FavoritesPage';
-import './App.css'
 
 function App() {
 

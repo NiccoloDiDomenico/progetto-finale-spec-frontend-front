@@ -1,17 +1,17 @@
-import { useContext, useEffect, useMemo, useState } from "react";
-import { GlobalContext } from "../contexts/GlobalContext";
-import ChampionCard from "../components/ChampionCard";
+import { useEffect, useMemo, useState } from "react";
+import { useChampions } from "../hooks/useChampions";
 import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilters";
 import SortFilter from "../components/SortFilter";
+import ChampionCard from "../components/ChampionCard";
 
 export default function HomePage() {
-    const { champions, loading, error, categories, setSearchQuery, setCategoryFilter } = useContext(GlobalContext);
+    const { champions, loading, error, categories, setSearch, setCategory } = useChampions();
     const [sortBy, setSortBy] = useState("default");
 
     useEffect(() => {
-        setSearchQuery("");
-        setCategoryFilter("");
+        setSearch("");
+        setCategory("");
     }, []);
 
     const sortedChampions = useMemo(() => {
@@ -47,7 +47,7 @@ export default function HomePage() {
                         {/* {Filter Category} */}
                         <CategoryFilter
                             categories={categories}
-                            setCategoryFilter={setCategoryFilter}
+                            setCategoryFilter={setCategory}
                         />
 
                         {/* Filter Sort */}
