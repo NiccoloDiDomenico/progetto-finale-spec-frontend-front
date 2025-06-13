@@ -1,9 +1,41 @@
+import { useFavorites } from "../hooks/useFavorites";
+import ChampionCard from "../components/ChampionCard";
+
 export default function FavoritesPage() {
+    const { favorites } = useFavorites();
+    console.log(favorites);
+
+
     return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-4xl font-bold mb-4">Favorites</h1>
-            <p className="text-lg text-gray-700">This page will display your favorite champions.</p>
-            <p className="mt-4 text-gray-500">You can add or remove champions from your favorites list here.</p>
+        <div className="min-h-screen w-full bg-gray-900">
+            <div className="container mx-auto py-10 px-20 text-white">
+                {/* Title */}
+                <section className="text-center mb-12">
+                    <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                        <span className="text-yellow-300">Favorites</span>
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-300">
+                        Your favorite champions all in one place.
+                    </p>
+                </section>
+
+                {/* No favorites */}
+                {favorites.length === 0 ? (
+                    <div className="text-center text-gray-400 text-xl mt-20">
+                        You haven't added any champions to favorites yet.
+                    </div>
+                ) : (
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        {favorites.map((champion) => (
+                            <ChampionCard
+                                key={champion.id}
+                                champion={champion}
+                                page="favorites"
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
