@@ -21,23 +21,25 @@ export default function ChampionCard({ champion, page }) {
     return (
         <Link
             to={`/champion/${champion.id}`}
-            className="relative bg-gray-800 rounded-lg p-4 flex max-sm:gap-3 sm:flex-col items-center hover:bg-gray-700 transition-colors cursor-pointer"
+            className="relative bg-gray-800 rounded-lg p-2 md:p-4 flex max-sm:gap-3 sm:flex-col items-center hover:bg-gray-700 transition-colors cursor-pointer"
         >
             {/* Card description */}
-            <img src={champion.image.square} alt={champion.name} className="w-18 sm:w-24 rounded-lg sm:mb-4 object-cover" />
-            <div className="text-center">
-                <h2 className="text-lg md:text-xl font-bold hover:text-yellow-300 transition-colors">
-                    {champion.title.toUpperCase()}
-                </h2>
-
-                {/* Champions role */}
-                {(page === 'homepage' || page === 'favorites') && (
-                    <p className="text-gray-400">{champion.category.toUpperCase()}</p>
-                )}
+            <img src={champion.image.square} alt={champion.name} className="w-18 sm:w-24 rounded-lg sm:mb-2 object-cover" />
+            <div className="sm:text-center max-sm:flex-1 max-sm:flex justify-between">
+                {/* Card Header */}
+                <div>
+                    <h2 className="text-lg md:text-xl font-bold hover:text-yellow-300 transition-colors">
+                        {champion.title.toUpperCase()}
+                    </h2>
+                    {/* Champions role */}
+                    {(page === 'homepage' || page === 'favorites') && (
+                        <p className="text-sm md:text-base text-gray-400">{champion.category.toUpperCase()}</p>
+                    )}
+                </div>
 
                 {/* Static Action Menu */}
                 {page === 'homepage' && (
-                    <div className="flex justify-center mt-2">
+                    <div className="flex sm:mt-1">
                         {/* Favorite button */}
                         <button
                             title="Add to Favorites"

@@ -3,8 +3,6 @@ import ChampionCard from "../components/ChampionCard";
 
 export default function FavoritesPage() {
     const { favorites } = useFavorites();
-    console.log(favorites);
-
 
     return (
         <div className="min-h-screen w-full bg-gray-900">
@@ -20,12 +18,15 @@ export default function FavoritesPage() {
                 </section>
 
                 {/* No favorites */}
-                {favorites.length === 0 ? (
+                {favorites.length === 0 && (
                     <div className="text-center text-gray-400 text-xl mt-20">
                         You haven't added any champions to favorites yet.
                     </div>
-                ) : (
-                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                )}
+
+                {/* Favorites List */}
+                {favorites.length > 0 && (
+                    <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                         {favorites.map((champion) => (
                             <ChampionCard
                                 key={champion.id}
