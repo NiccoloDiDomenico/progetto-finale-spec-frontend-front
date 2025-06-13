@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 
 const maxCompare = 3
 
@@ -24,8 +24,14 @@ export const CompareContext = createContext();
 // Provider
 export const CompareProvider = ({ children }) => {
     const [compareList, dispatch] = useReducer(compareReducer, []);
+    const [compareLimitReached, setCompareLimitReached] = useState(false);
 
     const addToCompare = (champion) => {
+        if (compareList.length >= 3) {
+            setCompareLimitReached(true);
+            setTimeout(() => setCompareLimitReached(false), 3000);
+            return;
+        }
         dispatch({ type: 'ADD', payload: champion });
     }
 
@@ -41,7 +47,13 @@ export const CompareProvider = ({ children }) => {
         return compareList.some((c) => c.id === championId);
     }
 
-    const value = { compareList, addToCompare, removeFromCompare, resetCompare, isCompare }
+    const toggleCompare = (champion) => {
+        isCompare(champion.id)
+            ? removeFromCompare(champion.id)
+            : addToCompare(champion);
+    };
+
+    const value = { compareList, addToCompare, removeFromCompare, resetCompare, isCompare, toggleCompare, compareLimitReached }
 
     return (
         <CompareContext.Provider value={value}>

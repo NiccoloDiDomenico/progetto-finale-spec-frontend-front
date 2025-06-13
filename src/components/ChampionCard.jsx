@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useFavorites } from "../hooks/useFavorites";
+import { useCompare } from "../hooks/useCompare";
 
 export default function ChampionCard({ champion, page }) {
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { toggleCompare, isCompare } = useCompare();
 
     const handleActionClick = (e, action) => {
         e.preventDefault();
@@ -11,7 +13,7 @@ export default function ChampionCard({ champion, page }) {
                 toggleFavorite(champion);
                 break;
             case 'compare':
-                // logic for compare 
+                toggleCompare(champion);
                 break;
             default:
                 break;
@@ -25,10 +27,10 @@ export default function ChampionCard({ champion, page }) {
         >
             {/* Card description */}
             <img src={champion.image.square} alt={champion.name} className="w-18 sm:w-24 rounded-lg sm:mb-2 object-cover" />
-            <div className="sm:text-center max-sm:flex-1 max-sm:flex justify-between">
+            <div className="sm:text-center max-sm:flex-1 max-sm:flex justify-between items-center">
                 {/* Card Header */}
                 <div>
-                    <h2 className="text-lg md:text-xl font-bold hover:text-yellow-300 transition-colors">
+                    <h2 className="text-base md:text-xl font-bold hover:text-yellow-300 transition-colors">
                         {champion.title.toUpperCase()}
                     </h2>
                     {/* Champions role */}
@@ -39,11 +41,11 @@ export default function ChampionCard({ champion, page }) {
 
                 {/* Static Action Menu */}
                 {page === 'homepage' && (
-                    <div className="flex sm:mt-1">
+                    <div className="flex max-sm:flex-col justify-center sm:mt-1">
                         {/* Favorite button */}
                         <button
                             title="Add to Favorites"
-                            className={`p-2 rounded-full hover:bg-gray-800 transition-colors ${isFavorite(champion.id) ? "text-yellow-300" : "text-gray-300"
+                            className={`p-2 rounded-lg hover:bg-gray-800 transition-colors ${isFavorite(champion.id) ? "text-yellow-300" : "text-gray-300"
                                 }`}
                             onClick={(e) => handleActionClick(e, 'favorites')}
                         >
@@ -56,7 +58,7 @@ export default function ChampionCard({ champion, page }) {
                         {/* Compare button */}
                         <button
                             title="Compare Champion"
-                            className="p-2 rounded-full hover:bg-gray-800 text-gray-300 hover:text-yellow-300 transition-colors"
+                            className={`p-2 rounded-lg hover:bg-gray-800 transition-colors ${isCompare(champion.id) ? "text-yellow-300" : "text-gray-300"}`}
                             onClick={(e) => handleActionClick(e, 'compare')}
                         >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
