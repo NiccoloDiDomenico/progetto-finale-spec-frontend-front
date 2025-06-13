@@ -26,7 +26,7 @@ export default function FavoritesPage() {
 
                 {/* Favorites List */}
                 {favorites.length > 0 && (
-                    <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                    <div className="grid sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6">
                         {favorites.map((champion) => (
                             <ChampionCard
                                 key={champion.id}

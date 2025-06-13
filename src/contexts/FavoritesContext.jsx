@@ -1,14 +1,19 @@
 import { createContext, useState } from "react";
 
+// Context
 export const FavoritesContext = createContext();
 
+// Provider
 export const FavoritesProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);
 
+    const isFavorite = (championId) => {
+        return favorites.some((c) => c.id === championId)
+    };
+
     const toggleFavorite = (champion) => {
         setFavorites((prev) => {
-            const alreadyInFavorites = prev.find((c) => c.id === champion.id);
-            if (alreadyInFavorites) {
+            if (isFavorite(champion.id)) {
                 return prev.filter((c) => c.id !== champion.id)
             } else {
                 return [...prev, champion]
@@ -16,11 +21,7 @@ export const FavoritesProvider = ({ children }) => {
         });
     };
 
-    const isFavorite = (championId) => {
-        return favorites.some((c) => c.id === championId)
-    };
-
-    const value = { favorites, toggleFavorite, isFavorite }
+    const value = { favorites, isFavorite, toggleFavorite }
 
     return (
         <FavoritesContext.Provider value={value}>
