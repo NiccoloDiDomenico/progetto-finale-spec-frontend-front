@@ -134,14 +134,17 @@ export default function ChampionsDetailPage() {
                                 </div>
                             ))}
                         </div>
+                        {/* Modal */}
                         {selectedAbility && (
                             <div className="fixed inset-0 bg-black/80 z-50 flex items-center">
                                 <div className="bg-gray-900 p-6 rounded-xl   max-w-xs md:max-w-md  mx-auto text-white relative">
                                     <button
-                                        className="absolute top-0 right-3 text-gray-400 text-2xl hover:text-white"
+                                        className="absolute top-3 right-3 text-gray-400 text-2xl hover:text-white"
                                         onClick={() => setSelectedAbility(null)}
                                     >
-                                        x
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12M18 6l-12 12" />
+                                        </svg>
                                     </button>
                                     <div className="flex items-center gap-4 mb-4">
                                         <img src={selectedAbility.image} alt={selectedAbility.name} />

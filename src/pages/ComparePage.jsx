@@ -58,7 +58,7 @@ export default function ComparatorPage() {
 
                     {/* Comparison Grid */}
                     {!champOne && !champTwo && (
-                        <p className="text-xl text-gray-300 text-center"> Select champions to compare</p>
+                        <div className="text-center text-gray-400 text-xl mt-20">Select champions to compare</div>
                     )}
 
                     {/* Champion Compare Card */}
