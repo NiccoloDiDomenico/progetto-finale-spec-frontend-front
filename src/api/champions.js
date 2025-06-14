@@ -11,7 +11,7 @@ export const fetchChampions = async (search, category) => {
     return res.json();
 };
 
-// Fetchchampion detail
+// Fetch champion detail
 export const fetchChampionById = async (id) => {
     const res = await fetch(`${API_URL}/champions/${id}`);
     if (!res.ok) throw new Error("Errore nel fetch del dettaglio campione");

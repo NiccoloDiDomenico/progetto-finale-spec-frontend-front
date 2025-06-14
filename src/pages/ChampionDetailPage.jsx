@@ -162,7 +162,7 @@ export default function ChampionsDetailPage() {
                     {/* Stats */}
                     <div>
                         <h2 className="text-3xl font-bold text-yellow-300 mb-4">Stats</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 text-center">
                             <div className="bg-gray-800 p-4 rounded-lg">
                                 <p className="text-gray-400">Health</p>
                                 <p className="font-bold text-xl">{champion.stats.hp}</p>

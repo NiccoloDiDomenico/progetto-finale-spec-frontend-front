@@ -70,8 +70,22 @@ export default function HomePage() {
                 <section>
                     {/* Loading State */}
                     {loading && (
-                        <div className="text-center text-yellow-300 text-2xl">
+                        <div className="text-center text-yellow-300 text-2xl mt-20">
                             <p>Loading champions...</p>
+                        </div>
+                    )}
+
+                    {/* Error States */}
+                    {error && (
+                        <div className="text-center text-red-500 text-2xl mt-20">
+                            <p>Error loading champions. Please try again later.</p>
+                        </div>
+                    )}
+
+                    {/* Empty Result State */}
+                    {!loading && sortedChampions.length === 0 && !error && (
+                        <div className="text-center text-gray-400 text-xl mt-20">
+                            <p>No champions found. Try changing your search or filter criteria.</p>
                         </div>
                     )}
 
@@ -86,12 +100,6 @@ export default function HomePage() {
                         ))}
                     </div>
 
-                    {/* Error States */}
-                    {error && (
-                        <div className="text-center text-red-500 text-2xl">
-                            <p>Error loading champions. Please try again later.</p>
-                        </div>
-                    )}
                 </section>
             </div>
         </div>
