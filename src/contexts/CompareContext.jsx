@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 const maxCompare = 3
 
@@ -23,8 +23,15 @@ export const CompareContext = createContext();
 
 // Provider
 export const CompareProvider = ({ children }) => {
-    const [compareList, dispatch] = useReducer(compareReducer, []);
     const [compareLimitReached, setCompareLimitReached] = useState(false);
+    const [compareList, dispatch] = useReducer(compareReducer, [], () => {
+        const saved = sessionStorage.getItem("compareList");
+        return saved ? JSON.parse(saved) : [];
+    });
+
+    useEffect(() => {
+        sessionStorage.setItem("compareList", JSON.stringify(compareList));
+    }, [compareList]);
 
     const addToCompare = (championId) => {
         if (compareList.length >= 3) {

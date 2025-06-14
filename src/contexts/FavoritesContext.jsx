@@ -1,11 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 // Context
 export const FavoritesContext = createContext();
 
 // Provider
 export const FavoritesProvider = ({ children }) => {
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState(() => {
+        const savedFavorites = localStorage.getItem("favorites");
+        return savedFavorites ? JSON.parse(savedFavorites) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }, [favorites]);
+
+    console.log(favorites);
+
 
     const isFavorite = (championId) => {
         return favorites.some((c) => c.id === championId)
