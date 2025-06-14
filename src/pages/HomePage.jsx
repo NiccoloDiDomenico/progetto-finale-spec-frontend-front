@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useChampions } from "../hooks/useChampions";
+import { useChampionsList } from "../hooks/useChampionsList";
 import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilters";
 import SortFilter from "../components/SortFilter";
@@ -7,7 +7,7 @@ import ChampionCard from "../components/ChampionCard";
 import { useCompare } from "../hooks/useCompare";
 
 export default function HomePage() {
-    const { champions, loading, error, categories, setSearch, setCategory } = useChampions();
+    const { champions, loading, error, categories, setSearch, setCategory } = useChampionsList();
     const { compareLimitReached } = useCompare();
     const [sortBy, setSortBy] = useState("default");
 

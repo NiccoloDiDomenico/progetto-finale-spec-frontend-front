@@ -9,8 +9,8 @@ export default function FavoritesPage() {
             <div className="container mx-auto py-10 px-20 text-white">
                 {/* Title */}
                 <section className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                        <span className="text-yellow-300">Favorites</span>
+                    <h1 className="text-5xl md:text-6xl font-bold text-yellow-300 mb-4">
+                        Favorites
                     </h1>
                     <p className="text-lg md:text-xl text-gray-300">
                         Your favorite champions all in one place.

@@ -6,11 +6,11 @@ const maxCompare = 3
 const compareReducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
-            if (state.some((c) => c.id === action.payload.id)) return state;
+            if (state.includes(action.payload)) return state;
             if (state.length >= maxCompare) return state;
             return [...state, action.payload];
         case 'REMOVE':
-            return state.filter((c) => c.id !== action.payload);
+            return state.filter((id) => id !== action.payload);
         case 'RESET':
             return [];
         default:
@@ -26,13 +26,13 @@ export const CompareProvider = ({ children }) => {
     const [compareList, dispatch] = useReducer(compareReducer, []);
     const [compareLimitReached, setCompareLimitReached] = useState(false);
 
-    const addToCompare = (champion) => {
+    const addToCompare = (championId) => {
         if (compareList.length >= 3) {
             setCompareLimitReached(true);
             setTimeout(() => setCompareLimitReached(false), 3000);
             return;
         }
-        dispatch({ type: 'ADD', payload: champion });
+        dispatch({ type: 'ADD', payload: championId });
     }
 
     const removeFromCompare = (championId) => {
@@ -43,14 +43,12 @@ export const CompareProvider = ({ children }) => {
         dispatch({ type: 'RESET' });
     }
 
-    const isCompare = (championId) => {
-        return compareList.some((c) => c.id === championId);
-    }
+    const isCompare = (championId) => compareList.includes(championId);
 
     const toggleCompare = (champion) => {
         isCompare(champion.id)
             ? removeFromCompare(champion.id)
-            : addToCompare(champion);
+            : addToCompare(champion.id);
     };
 
     const value = { compareList, addToCompare, removeFromCompare, resetCompare, isCompare, toggleCompare, compareLimitReached }

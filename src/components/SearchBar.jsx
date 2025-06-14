@@ -1,7 +1,7 @@
-import { useChampions } from "../hooks/useChampions";
+import { useChampionsList } from "../hooks/useChampionsList";
 
 export default function SearchBar() {
-    const { search, setSearch } = useChampions();
+    const { search, setSearch } = useChampionsList();
 
     return (
         <div className="relative flex-1 max-w-md">
