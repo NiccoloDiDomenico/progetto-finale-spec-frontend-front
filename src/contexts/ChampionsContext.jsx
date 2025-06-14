@@ -6,7 +6,7 @@ export const ChampionsContext = createContext();
 
 // Provider
 export const ChampionsProvider = ({ children }) => {
-    const [champions, setChampions] = useState([]);
+    const [championsList, setChampionsList] = useState([]);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState("");
@@ -19,7 +19,7 @@ export const ChampionsProvider = ({ children }) => {
             setLoading(true);
             try {
                 const data = await fetchChampions(search, category);
-                setChampions(data);
+                setChampionsList(data);
             } catch (err) {
                 console.error(err);
                 setError(true);
@@ -32,7 +32,7 @@ export const ChampionsProvider = ({ children }) => {
     }, [search, category]);
 
     const value = {
-        champions,
+        championsList,
         search,
         setSearch,
         category,

@@ -7,7 +7,7 @@ import ChampionCard from "../components/ChampionCard";
 import { useCompare } from "../hooks/useCompare";
 
 export default function HomePage() {
-    const { champions, loading, error, categories, setSearch, setCategory } = useChampionsList();
+    const { championsList, loading, error, categories, setSearch, setCategory } = useChampionsList();
     const { compareLimitReached } = useCompare();
     const [sortBy, setSortBy] = useState("default");
 
@@ -17,12 +17,12 @@ export default function HomePage() {
     }, []);
 
     const sortedChampions = useMemo(() => {
-        return [...champions].sort((a, b) => {
+        return [...championsList].sort((a, b) => {
             if (sortBy === "default") return 0;
             const [field, direction] = sortBy.split("-");
             return a[field].localeCompare(b[field]) * (direction === "asc" ? 1 : -1);
         })
-    }, [champions, sortBy]);
+    }, [championsList, sortBy]);
 
     return (
         <div className="min-h-screen w-full bg-gray-900">

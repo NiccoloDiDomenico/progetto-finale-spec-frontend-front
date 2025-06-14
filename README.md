@@ -1,6 +1,6 @@
 # Progetto
 
-🖼️ Cosa devi realizzare
+*🖼️ Cosa devi realizzare*
 Una SPA in React che simula l’esperienza di un utente non autenticato, che può:
 
 - Sfogliare, cercare e filtrare record
@@ -8,11 +8,11 @@ Una SPA in React che simula l’esperienza di un utente non autenticato, che pu�
 - Salvare i preferiti
 ❌ Non può creare, modificare o cancellare record.
 
-🔍 Tecnologie da utilizzare
+*🔍 Tecnologie da utilizzare*
 Utilizza esclusivamente le tecnologie e le modalità viste durante il corso per sviluppare l’interfaccia e le funzionalità del progetto.
 È consentito però l’uso di librerie esterne per la gestione dello styling, come ad esempio Tailwind CSS, Bootstrap o styled-components, purché non alterino il comportamento logico dell’applicazione.
 
-🏆 Requisiti Minimi
+*🏆 Requisiti Minimi*
 Per considerare il progetto completo, devono essere implementate almeno queste funzionalità:
 
 - Gestione di una risorsa definita in types.ts
@@ -28,7 +28,7 @@ Per considerare il progetto completo, devono essere implementate almeno queste f
   - L’utente può aggiungere o rimuovere record dai preferiti in qualsiasi momento
   - I preferiti devono essere consultabili in ogni sezione dell’app (es. tramite una sezione dedicata, un’icona fissa, o una sidebar)
 
-🎯 Requisiti Aggiuntivi (Facoltativi)
+*🎯 Requisiti Aggiuntivi (Facoltativi)*
 Da affrontare solo dopo aver completato i Requisiti Minimi:
 
 - Comparatore di 2 o più record: il layout si adatta per confrontare più elementi affiancati
@@ -39,7 +39,7 @@ Da affrontare solo dopo aver completato i Requisiti Minimi:
   - Lista preferiti vuota
   - Nessun elemento selezionato nel comparatore
 
-🎯 Requisiti Avanzati (Facoltativi)
+*🎯 Requisiti Avanzati (Facoltativi)*
 Da affrontare solo dopo i Requisiti Aggiuntivi:
 
 - Gestione di più risorse nella stessa SPA (es. products e courses), con interfacce distinte o integrate
@@ -49,7 +49,7 @@ Da affrontare solo dopo i Requisiti Aggiuntivi:
 - Eliminazione di record
 - Validazione dei campi in input
 
-🎯 BONUS (Facoltativo)
+*🎯 BONUS (Facoltativo)*
 Da affrontare solo dopo i Requisiti Avanzati:
 
 - Riscrittura completa del progetto in TypeScript, per aggiungere tipizzazione forte, migliori strumenti di sviluppo e un’esperienza da progetto "enterprise-ready".

@@ -19,8 +19,8 @@ export default function FavoritesPage() {
 
                 {/* No favorites */}
                 {favorites.length === 0 && (
-                    <div className="text-center text-gray-400 text-xl mt-20">
-                        You haven't added any champions to favorites yet.
+                    <div className="text-center text-gray-400 text-lg md:text-xl mt-20">
+                        Add champions to your favorites from the homepage
                     </div>
                 )}
 
