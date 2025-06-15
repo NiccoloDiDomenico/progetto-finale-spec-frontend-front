@@ -1,16 +1,13 @@
 import { useCompare } from "../hooks/useCompare";
-import { getDifficultyRating, getColorClass } from "../utils/customFunctions";
+import { championStats } from "../utils/championStats";
+import { getDifficultyRating, getColorClass, getMaxValueFromRivals } from "../utils/customFunctions";
 import ChampionCard from "./ChampionCard";
 
 export default function ChampionCompareCard({ champion, rivals = [] }) {
     const { removeFromCompare } = useCompare();
 
-    const getMaxFromRivals = (getter) =>
-        Math.max(...rivals.map(r => r && getter(r)).filter(n => typeof n === "number")) || 0;
-
     return (
         <div className="relative bg-gray-800 rounded-xl p-6 space-y-6">
-
             {/* Header card */}
             <ChampionCard champion={champion} />
 
@@ -43,16 +40,16 @@ export default function ChampionCompareCard({ champion, rivals = [] }) {
             <div className="space-y-4">
                 <h2 className="text-xl font-bold text-yellow-300">Info</h2>
                 <div className="space-y-2">
-                    {["attack", "defense", "magic"].map((key) => (
-                        <div key={key} className="flex justify-between items-center border-b border-gray-700 pb-2">
-                            <p className="text-gray-400">{key.charAt(0).toUpperCase() + key.slice(1)}</p>
+                    {["attack", "defense", "magic"].map((stat) => (
+                        <div key={stat} className="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <p className="text-gray-400">{stat.charAt(0).toUpperCase() + stat.slice(1)}</p>
                             <p
                                 className={`font-bold ${getColorClass(
-                                    champion.info[key],
-                                    getMaxFromRivals(r => r.info?.[key])
+                                    champion.info[stat],
+                                    getMaxValueFromRivals(rivals, stat)
                                 )}`}
                             >
-                                {champion.info[key]}
+                                {champion.info[stat]}
                             </p>
                         </div>
                     ))}
@@ -63,32 +60,21 @@ export default function ChampionCompareCard({ champion, rivals = [] }) {
             <div className="space-y-4">
                 <h2 className="text-xl font-bold text-yellow-300">Stats</h2>
                 <div className="space-y-2">
-                    {[
-                        { key: "hp", label: "Health", suffix: "hpperlevel" },
-                        { key: "mp", label: "Mana", suffix: "mpperlevel" },
-                        { key: "movespeed", label: "Movement Speed" },
-                        { key: "armor", label: "Armor", suffix: "armorperlevel" },
-                        { key: "spellblock", label: "Magic Resist", suffix: "spellblockperlevel" },
-                        { key: "attackrange", label: "Attack Range" },
-                        { key: "hpregen", label: "HP Regen", suffix: "hpregenperlevel" },
-                        { key: "mpregen", label: "Mana Regen", suffix: "mpregenperlevel" },
-                        { key: "attackspeedperlevel", label: "Attack Speed", suffix: "attackspeedperlevel", isPercent: true },
-                        { key: "crit", label: "Critical Strike", suffix: "critperlevel", isPercent: true },
-                    ].map(({ key, label, suffix, isPercent }) => (
-                        <div key={key} className="flex justify-between items-center border-b border-gray-700 pb-2">
+                    {championStats.map(({ stat, label, perLevel, isPercent }) => (
+                        <div key={stat} className="flex justify-between items-center border-b border-gray-700 pb-2">
                             <p className="text-gray-400">{label}</p>
                             <div className="text-right">
                                 <p
                                     className={`font-bold ${getColorClass(
-                                        champion.stats[key],
-                                        getMaxFromRivals(r => r.stats?.[key])
+                                        champion.stats[stat],
+                                        getMaxValueFromRivals(rivals, stat)
                                     )}`}
                                 >
-                                    {isPercent ? `${champion.stats[key]}%` : champion.stats[key]}
+                                    {isPercent ? `${champion.stats[stat]}%` : champion.stats[stat]}
                                 </p>
-                                {suffix && champion.stats[suffix] != null && (
+                                {perLevel && champion.stats[perLevel] != null && (
                                     <p className="text-sm text-gray-400">
-                                        +{champion.stats[suffix]}
+                                        +{champion.stats[perLevel]}
                                         {isPercent ? "%" : ""} per level
                                     </p>
                                 )}

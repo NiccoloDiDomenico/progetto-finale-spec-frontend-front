@@ -3,7 +3,6 @@ export function debounce(callback, delay) {
 
     return (value) => {
         clearTimeout(timer);
-
         timer = setTimeout(() => {
             callback(value);
         }, delay);
