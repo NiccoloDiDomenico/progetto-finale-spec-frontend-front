@@ -5,13 +5,13 @@ const maxCompare = 3
 // Reducer
 const compareReducer = (state, action) => {
     switch (action.type) {
-        case 'ADD':
+        case 'ADD_COMPARE':
             if (state.includes(action.payload)) return state;
             if (state.length >= maxCompare) return state;
             return [...state, action.payload];
-        case 'REMOVE':
+        case 'REMOVE_COMPARE':
             return state.filter((id) => id !== action.payload);
-        case 'RESET':
+        case 'RESET_COMPARE':
             return [];
         default:
             break;
@@ -39,15 +39,15 @@ export const CompareProvider = ({ children }) => {
             setTimeout(() => setCompareLimitReached(false), 3000);
             return;
         }
-        dispatch({ type: 'ADD', payload: championId });
+        dispatch({ type: 'ADD_COMPARE', payload: championId });
     }
 
     const removeFromCompare = (championId) => {
-        dispatch({ type: 'REMOVE', payload: championId });
+        dispatch({ type: 'REMOVE_COMPARE', payload: championId });
     }
 
     const resetCompare = () => {
-        dispatch({ type: 'RESET' });
+        dispatch({ type: 'RESET_COMPARE' });
     }
 
     const isCompare = (championId) => compareList.includes(championId);

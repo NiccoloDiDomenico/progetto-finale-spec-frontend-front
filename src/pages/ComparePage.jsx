@@ -23,22 +23,22 @@ export default function ComparatorPage() {
 
     return (
         <div className="min-h-screen bg-gray-900 text-white py-10 px-4">
-            {/* Title Section */}
+            {/* Hero Section */}
             <section className="text-center mb-12">
-                <h1 className="text-5xl md:text-6xl font-bold text-yellow-300 mb-4">Compare</h1>
+                <h1 className="text-4xl font-bold text-yellow-300 mb-8">Compare</h1>
                 <p className="text-lg md:text-xl text-gray-300">
                     Compare detailed statistics and information about multiple League of Legends champions.
                 </p>
 
-                <div className="flex justify-center gap-4 mt-6">
+                <div className="flex justify-center gap-4 my-8">
                     {/* Add Champion Select */}
                     <select
-                        value={selectedId}
                         className="px-4 py-2 rounded bg-gray-800 text-white"
+                        value={selectedId}
                         onChange={handleSelect}
                         disabled={compareList.length === 3}
                     >
-                        <option value="">{compareList.length < 3 ? "Add new champ" : "-"}</option>
+                        <option value="">{compareList.length < 3 ? "Add to comparator" : "-"}</option>
                         {availableOptions.map(champ => (
                             <option key={champ.id} value={champ.id}>
                                 {champ.title}
@@ -61,7 +61,8 @@ export default function ComparatorPage() {
                 {/* Empty state */}
                 {compareList.length === 0 && (
                     <div className="text-center text-gray-400 text-lg md:text-xl mt-20">
-                        No champions selected for comparison. Please add champions to compare.
+                        Select champions to compare them. <br />
+                        You can add up to 3 champions.
                     </div>
                 )}
 
