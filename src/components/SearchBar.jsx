@@ -1,7 +1,4 @@
-import { useChampionsList } from "../hooks/useChampionsList";
-
-export default function SearchBar() {
-    const { search, setSearch } = useChampionsList();
+export default function SearchBar({ search, setSearch }) {
 
     return (
         <div className="relative flex-1 max-w-md">
@@ -16,13 +13,11 @@ export default function SearchBar() {
                 search && (
                     <button
                         type="button"
-                        className="absolute right-2 top-2 text-gray-400 hover:text-white"
+                        title="Clear Search"
                         aria-label="Clear search"
                         aria-controls="champion-search"
-                        onClick={() => {
-                            setSearch("");
-                            setInputValue("");
-                        }}
+                        className="absolute right-2 top-2 text-gray-400 hover:text-white"
+                        onClick={() => setSearch("")}
                     >
                         ✕
                     </button>

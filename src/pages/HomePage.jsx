@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useChampionsList } from "../hooks/useChampionsList";
+import { useCompare } from "../hooks/useCompare";
 import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilters";
 import SortFilter from "../components/SortFilter";
 import ChampionCard from "../components/ChampionCard";
-import { useCompare } from "../hooks/useCompare";
 
 export default function HomePage() {
-    const { championsList, loading, error, categories, setSearch, setCategory } = useChampionsList();
+    const { championsList, loading, error, categories, search, setSearch, setCategory } = useChampionsList();
     const { compareLimitReached } = useCompare();
     const [sortBy, setSortBy] = useState("default");
 
@@ -43,7 +43,10 @@ export default function HomePage() {
 
                     <div className="flex flex-col items-stretch md:flex-row md:justify-center lg:flex-wrap gap-4 my-12">
                         {/* Search Bar */}
-                        <SearchBar />
+                        <SearchBar
+                            search={search}
+                            setSearch={setSearch}
+                        />
 
                         {/* {Filter SVG} */}
                         <div className="px-4 py-2 rounded text-white flex items-center">
@@ -67,6 +70,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
+                {/* Champions Section */}
                 <section>
                     {/* Loading State */}
                     {loading && (
@@ -82,8 +86,8 @@ export default function HomePage() {
                         </div>
                     )}
 
-                    {/* Empty Result State */}
-                    {!loading && sortedChampions.length === 0 && !error && (
+                    {/* No champions */}
+                    {!loading && !error && sortedChampions.length === 0 && (
                         <div className="text-center text-gray-400 text-xl mt-20">
                             <p>No champions found. Try changing your search or filter criteria.</p>
                         </div>

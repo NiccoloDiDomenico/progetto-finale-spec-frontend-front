@@ -14,9 +14,6 @@ export const FavoritesProvider = ({ children }) => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
-    console.log(favorites);
-
-
     const isFavorite = (championId) => {
         return favorites.some((c) => c.id === championId)
     };
